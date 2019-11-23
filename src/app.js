@@ -1,13 +1,7 @@
 const express = require('express');
 const app = express();
 
-app.use((request, response, next) => {
-    const data = {
-        message:" it works baby!"
-    }
-    response
-        .status(200)
-        .json(data)
-});
+const taskRouter = require('./routes/tasks');
+app.use('/api/tasks', taskRouter);
 
 module.exports = app;
