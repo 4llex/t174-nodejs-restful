@@ -12,4 +12,14 @@ router.post('/', (request, response) => {
         .json(data);
 });
 
+router.get('/', (request, response) => {
+    const data ={};
+
+    data.message = `Dado enviado ${request.method} ao usuario.!!!`;
+
+    response
+        .status(200)
+        .json(data);
+})
+
 module.exports = router;
