@@ -1,33 +1,32 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/', (request, response) => {
+const TaskService = require('../services/taskService');
+const checkAuth = require('../middleware/check-auth');
+const notFound = require('../middleware/notfound');
+
+router.post('/', checkAuth, async (request, response) => {
     
-    const data ={
-        message: "Viva la vida lookaaa baby!"
-    };
+    const task = await TaskService.add(request.body);
 
     response
         .status(200)
-        .json(data);
+        .json(task);
 });
 
-router.get('/', (request, response) => {
-    const data ={};
-
-    data.message = `Dado enviado ${request.method} ao usuario.!!!`;
-
-    response
-        .status(200)
-        .json(data);
+router.get('/', async (request, response) => {
+    
+    const tasks = await TaskService.getAll();
+    tasks //&& tasks.lenght 
+    ? response.json(tasks)
+    :response.status(204).end();
 });
 
-router.get('/:taskId', (request, response) => {
-    const data = {
-        taskId: request.params.taskId, 
-        message: `Busca com GET e ID`
-    }
-
+router.get('/:taskId', async (request, response) => {
+    const task = await TaskService.getById(request.params.taskId);
+    task 
+        ? response.json(task)
+        : notFound(Request, response);
     response
         .status(200)
         .json(data);

@@ -10,6 +10,7 @@ const morgan = require('morgan');
 app.use(cors());
 app.use(helmet());
 app.use(morgan('dev')); // mostra os requests do usuario no terminal 
+app.use(express.json());
 
 // Routes
 const taskRouter = require('./routes/tasks');
