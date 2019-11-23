@@ -20,6 +20,41 @@ router.get('/', (request, response) => {
     response
         .status(200)
         .json(data);
-})
+});
 
+router.get('/:taskId', (request, response) => {
+    const data = {
+        taskId: request.params.taskId, 
+        message: `Busca com GET e ID`
+    }
+
+    response
+        .status(200)
+        .json(data);
+});
+
+router.delete('/:taskId', (request, response) => {
+    const data = {
+        taskId: request.params.taskId, 
+        message: `route to delete objet`
+    }
+
+    response
+        .status(200)
+        .json(data);
+});
+
+router.patch('/:taskId', (request, response) => {
+    const data = {
+        taskId: request.params.taskId, 
+        message: `route to update an object`
+    }
+
+    response
+        .status(200)
+        .json(data);
+});
+
+
+   
 module.exports = router;
